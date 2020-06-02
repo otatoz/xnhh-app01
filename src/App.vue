@@ -1,28 +1,59 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class='xpf'>{{msg}}</div>
+    <List title='数据列表' :data='listData'>
+      <template v-slot='slot'>
+        <div>{{slot.scope.id}}</div>
+        <div>{{slot.scope.name}}</div>
+      </template>
+    </List>
+
+    <!-- <Article></Article>
+    <User></User>
+    <Category></Category> -->
+    <button @click="currentPage = 'Article'">文章管理</button>
+    <button @click="currentPage = 'Category'">栏目管理</button>
+    <button @click="currentPage = 'User'">用户管理</button>
+    <keep-alive>
+      <component :is="currentPage"></component>
+    </keep-alive>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// 导入组件
+import List from './components/List.vue'
+import Article from './pages/Article.vue'
+import Category from './pages/Category.vue'
+import User from './pages/User.vue'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    List,
+    Article,
+    User,
+    Category
+  },
+  data(){
+    return {
+      currentPage:'Article',
+      msg:'hello vue-cli',
+      listData:[{
+        id:1,
+        name:'军事'
+      },{
+        id:2,
+        name:'爱情'
+      },{
+        id:3,
+        name:'历史'
+      }]
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  .xpf{
+    background-color: red;
+  }
 </style>
+
