@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div>
+    <Echart></Echart>
+    <Liner></Liner>
+    
     <div class='xpf'>{{msg}}</div>
     <List title='数据列表' :data='listData'>
       <template v-slot='slot'>
@@ -8,9 +11,6 @@
       </template>
     </List>
 
-    <!-- <Article></Article>
-    <User></User>
-    <Category></Category> -->
     <button @click="currentPage = 'Article'">文章管理</button>
     <button @click="currentPage = 'Category'">栏目管理</button>
     <button @click="currentPage = 'User'">用户管理</button>
@@ -25,13 +25,20 @@ import List from './components/List.vue'
 import Article from './pages/Article.vue'
 import Category from './pages/Category.vue'
 import User from './pages/User.vue'
+import Liner from './components/Liner.vue'
+
+// 导入echarts图表
+import Echart from './components/Echart.vue'
+
 export default {
   name: 'App',
   components:{
     List,
     Article,
     User,
-    Category
+    Category,
+    Liner,
+    Echart
   },
   data(){
     return {
